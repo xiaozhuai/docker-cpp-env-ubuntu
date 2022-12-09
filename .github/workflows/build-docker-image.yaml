@@ -1,6 +1,7 @@
 name: build-docker-image
 
 on:
+    workflow_dispatch:
     push:
         branches: [ master ]
     pull_request:
@@ -25,5 +26,15 @@ jobs:
                 uses: docker/build-push-action@v3
                 with:
                     platforms: linux/amd64,linux/arm64/v8,linux/arm/v7
-                    push: true
+                    push: ${{ github.event_name != 'pull_request' }}
                     tags: xiaozhuai/cpp-env-ubuntu:latest
+            -   uses: actions/checkout@v3
+                if: ${{ github.event_name != 'pull_request' }}
+            -   name: Docker Hub Description
+                uses: peter-evans/dockerhub-description@v3
+                if: ${{ github.event_name != 'pull_request' }}
+                with:
+                    username: ${{ secrets.DOCKERHUB_USERNAME }}
+                    password: ${{ secrets.DOCKERHUB_TOKEN }}
+                    repository: xiaozhuai/cpp-env-ubuntu
+                    short-description: ${{ github.event.repository.description }}
