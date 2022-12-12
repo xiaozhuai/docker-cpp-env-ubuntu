@@ -25,3 +25,5 @@ RUN apt-get update \
   && apt-get clean
 
 ENV TERM=xterm-256color
+
+ENTRYPOINT ["/bin/bash"]
