@@ -22,8 +22,11 @@ RUN apt-get update \
       tar \
       python3 \
       python3-dev \
+      language-pack-zh-hans \
+  && locale-gen zh_CN.UTF-8 \
   && apt-get clean
 
-ENV TERM=xterm-256color
+ENV LANG C.UTF-8
+ENV TERM xterm-256color
 
 CMD ["/bin/bash"]
