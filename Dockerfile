@@ -26,7 +26,7 @@ RUN apt-get update \
   && locale-gen zh_CN.UTF-8 \
   && apt-get clean
 
-ENV LANG C.UTF-8
-ENV TERM xterm-256color
+ENV LANG "C.UTF-8"
+ENV TERM "xterm-256color"
 
 CMD ["/bin/bash"]
