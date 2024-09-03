@@ -1,9 +1,9 @@
 FROM ubuntu:latest
 
-RUN DEBIAN_FRONTEND="noninteractive" apt-get update && apt-get -y install tzdata apt-utils
-
-RUN apt-get update \
+RUN DEBIAN_FRONTEND="noninteractive" apt-get update \
   && apt-get install -y  \
+      tzdata \
+      apt-utils \
       build-essential \
       gcc \
       g++ \
@@ -26,7 +26,7 @@ RUN apt-get update \
   && locale-gen zh_CN.UTF-8 \
   && apt-get clean
 
-ENV LANG "C.UTF-8"
-ENV TERM "xterm-256color"
+ENV LANG="C.UTF-8"
+ENV TERM="xterm-256color"
 
 CMD ["/bin/bash"]
